@@ -1,0 +1,142 @@
+# Team name alias mapping for Football Market Intelligence System
+#
+# Structure:
+#   canonical_name:         The single authoritative name used throughout the project.
+#     fdco:                 Name as it appears in football-data.co.uk CSV files.
+#     api_football:         Name as returned by API-Football (verify on first fetch).
+#     short_code:           3-letter abbreviation for display / logging.
+#
+# IMPORTANT: Verify fdco names against the actual downloaded CSVs.
+# If a name does not resolve, add an alias here rather than patching the loader.
+# The team_resolver will raise a hard error for unresolved names — never silently skip.
+
+teams:
+  Arsenal:
+    fdco: "Arsenal"
+    api_football: "Arsenal"
+    short_code: "ARS"
+
+  Aston Villa:
+    fdco: "Aston Villa"
+    api_football: "Aston Villa"
+    short_code: "AVL"
+
+  Bournemouth:
+    fdco: "Bournemouth"
+    api_football: "Bournemouth"
+    short_code: "BOU"
+
+  Brentford:
+    fdco: "Brentford"
+    api_football: "Brentford"
+    short_code: "BRE"
+
+  Brighton:
+    fdco: "Brighton"
+    api_football: "Brighton"
+    short_code: "BHA"
+
+  Burnley:
+    fdco: "Burnley"
+    api_football: "Burnley"
+    short_code: "BUR"
+
+  Chelsea:
+    fdco: "Chelsea"
+    api_football: "Chelsea"
+    short_code: "CHE"
+
+  Crystal Palace:
+    fdco: "Crystal Palace"
+    api_football: "Crystal Palace"
+    short_code: "CRY"
+
+  Everton:
+    fdco: "Everton"
+    api_football: "Everton"
+    short_code: "EVE"
+
+  Fulham:
+    fdco: "Fulham"
+    api_football: "Fulham"
+    short_code: "FUL"
+
+  Leeds United:
+    fdco: "Leeds"
+    api_football: "Leeds"
+    short_code: "LEE"
+
+  Leicester City:
+    fdco: "Leicester"
+    api_football: "Leicester"
+    short_code: "LEI"
+
+  Liverpool:
+    fdco: "Liverpool"
+    api_football: "Liverpool"
+    short_code: "LIV"
+
+  Luton Town:
+    fdco: "Luton"
+    api_football: "Luton"
+    short_code: "LUT"
+
+  Manchester City:
+    fdco: "Man City"
+    api_football: "Manchester City"
+    short_code: "MCI"
+
+  Manchester United:
+    fdco: "Man United"
+    api_football: "Manchester United"
+    short_code: "MUN"
+
+  Newcastle United:
+    fdco: "Newcastle"
+    api_football: "Newcastle"
+    short_code: "NEW"
+
+  Nottingham Forest:
+    fdco: "Nott'm Forest"
+    api_football: "Nottingham Forest"
+    short_code: "NFO"
+
+  Norwich City:
+    fdco: "Norwich"
+    api_football: "Norwich"
+    short_code: "NOR"
+
+  Sheffield United:
+    fdco: "Sheffield United"
+    api_football: "Sheffield United"
+    short_code: "SHU"
+
+  Southampton:
+    fdco: "Southampton"
+    api_football: "Southampton"
+    short_code: "SOU"
+
+  Tottenham Hotspur:
+    fdco: "Tottenham"
+    api_football: "Tottenham"
+    short_code: "TOT"
+
+  Watford:
+    fdco: "Watford"
+    api_football: "Watford"
+    short_code: "WAT"
+
+  West Bromwich Albion:
+    fdco: "West Brom"
+    api_football: "West Brom"
+    short_code: "WBA"
+
+  West Ham United:
+    fdco: "West Ham"
+    api_football: "West Ham"
+    short_code: "WHU"
+
+  Wolverhampton Wanderers:
+    fdco: "Wolves"
+    api_football: "Wolves"
+    short_code: "WOL"
