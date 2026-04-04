@@ -47,6 +47,15 @@ def main() -> None:
         help="Compute features but do not write to DB.",
     )
     parser.add_argument(
+        "--rebuild",
+        action="store_true",
+        help=(
+            "Delete existing engineered_features rows and re-insert from scratch. "
+            "Required after loading new data sources (e.g. Understat xG) so that "
+            "rolling features are recomputed with the updated team_match_stats."
+        ),
+    )
+    parser.add_argument(
         "--sample",
         type=int,
         default=None,
@@ -62,6 +71,7 @@ def main() -> None:
     log.info("Phase 3 — Feature Engineering")
     log.info("Competition : %s", args.competition)
     log.info("Dry run     : %s", args.dry_run)
+    log.info("Rebuild     : %s", args.rebuild)
     log.info("DB path     : %s", DB_PATH)
     log.info("=" * 60)
 
@@ -99,7 +109,7 @@ def main() -> None:
                 if val is not None and str(val) != "nan":
                     log.info("  %-45s  %s", col, f"{val:.4f}" if isinstance(val, float) else val)
     else:
-        n_inserted = save_features(features, db_path=DB_PATH)
+        n_inserted = save_features(features, db_path=DB_PATH, force=args.rebuild)
         log.info("=" * 60)
         log.info("Feature pipeline complete.")
         log.info("  Rows inserted             : %d", n_inserted)

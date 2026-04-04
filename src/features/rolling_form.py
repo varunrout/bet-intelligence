@@ -93,7 +93,8 @@ def build_team_match_events(
     events = pd.concat([home[base_cols], away[base_cols]], ignore_index=True)
 
     # ── Merge with stats ────────────────────────────────────────────────────
-    stat_cols = ["match_id", "team_id", "shots", "shots_on_target", "corners", "yellow_cards"]
+    stat_cols = ["match_id", "team_id", "shots", "shots_on_target", "corners", "yellow_cards",
+                 "xg_for", "xg_against"]
     available_stat_cols = [c for c in stat_cols if c in stats_df.columns]
     events = events.merge(
         stats_df[available_stat_cols],
@@ -166,6 +167,8 @@ def compute_rolling_stats(
         "goals_against":     "goals_conceded",
         "shots":             "shots",
         "shots_on_target":   "shots_on_target",
+        "xg_for":            "xg_for",       # rolling xG scored (populated after Understat fetch)
+        "xg_against":        "xg_against",   # rolling xG conceded
     }
     sum_metrics = {
         "won":         "wins",
@@ -224,6 +227,7 @@ def pivot_to_match_features(
         "match_id", "kickoff_utc", "team_id", "opp_team_id", "is_home",
         "goals_for", "goals_against", "won", "drew", "clean_sheet", "over_25",
         "shots", "shots_on_target", "corners", "yellow_cards",
+        "xg_for", "xg_against",  # current-match values — excluded to prevent leakage
     }
     feature_cols = [c for c in events_with_rolling.columns if c not in base_cols]
 

@@ -4,6 +4,7 @@
 #   canonical_name:         The single authoritative name used throughout the project.
 #     fdco:                 Name as it appears in football-data.co.uk CSV files.
 #     api_football:         Name as returned by API-Football (verify on first fetch).
+#     understat:            Name as it appears on understat.com league pages.
 #     short_code:           3-letter abbreviation for display / logging.
 #
 # IMPORTANT: Verify fdco names against the actual downloaded CSVs.
@@ -14,129 +15,155 @@ teams:
   Arsenal:
     fdco: "Arsenal"
     api_football: "Arsenal"
+    understat: "Arsenal"
     short_code: "ARS"
 
   Aston Villa:
     fdco: "Aston Villa"
     api_football: "Aston Villa"
+    understat: "Aston Villa"
     short_code: "AVL"
 
   Bournemouth:
     fdco: "Bournemouth"
     api_football: "Bournemouth"
+    understat: "Bournemouth"
     short_code: "BOU"
 
   Brentford:
     fdco: "Brentford"
     api_football: "Brentford"
+    understat: "Brentford"
     short_code: "BRE"
 
   Brighton:
     fdco: "Brighton"
     api_football: "Brighton"
+    understat: "Brighton"
     short_code: "BHA"
 
   Burnley:
     fdco: "Burnley"
     api_football: "Burnley"
+    understat: "Burnley"
     short_code: "BUR"
 
   Chelsea:
     fdco: "Chelsea"
     api_football: "Chelsea"
+    understat: "Chelsea"
     short_code: "CHE"
 
   Crystal Palace:
     fdco: "Crystal Palace"
     api_football: "Crystal Palace"
+    understat: "Crystal Palace"
     short_code: "CRY"
 
   Everton:
     fdco: "Everton"
     api_football: "Everton"
+    understat: "Everton"
     short_code: "EVE"
 
   Fulham:
     fdco: "Fulham"
     api_football: "Fulham"
+    understat: "Fulham"
     short_code: "FUL"
 
   Leeds United:
     fdco: "Leeds"
     api_football: "Leeds"
+    understat: "Leeds"
     short_code: "LEE"
 
   Leicester City:
     fdco: "Leicester"
     api_football: "Leicester"
+    understat: "Leicester"
     short_code: "LEI"
 
   Liverpool:
     fdco: "Liverpool"
     api_football: "Liverpool"
+    understat: "Liverpool"
     short_code: "LIV"
 
   Luton Town:
     fdco: "Luton"
     api_football: "Luton"
+    understat: "Luton"
     short_code: "LUT"
 
   Manchester City:
     fdco: "Man City"
     api_football: "Manchester City"
+    understat: "Manchester City"
     short_code: "MCI"
 
   Manchester United:
     fdco: "Man United"
     api_football: "Manchester United"
+    understat: "Manchester United"
     short_code: "MUN"
 
   Newcastle United:
     fdco: "Newcastle"
     api_football: "Newcastle"
+    understat: "Newcastle United"
     short_code: "NEW"
 
   Nottingham Forest:
     fdco: "Nott'm Forest"
     api_football: "Nottingham Forest"
+    understat: "Nottingham Forest"
     short_code: "NFO"
 
   Norwich City:
     fdco: "Norwich"
     api_football: "Norwich"
+    understat: "Norwich"
     short_code: "NOR"
 
   Sheffield United:
     fdco: "Sheffield United"
     api_football: "Sheffield United"
+    understat: "Sheffield United"
     short_code: "SHU"
 
   Southampton:
     fdco: "Southampton"
     api_football: "Southampton"
+    understat: "Southampton"
     short_code: "SOU"
 
   Tottenham Hotspur:
     fdco: "Tottenham"
     api_football: "Tottenham"
+    understat: "Tottenham"
     short_code: "TOT"
 
   Watford:
     fdco: "Watford"
     api_football: "Watford"
+    understat: "Watford"
     short_code: "WAT"
 
   West Bromwich Albion:
     fdco: "West Brom"
     api_football: "West Brom"
+    understat: "West Bromwich Albion"
     short_code: "WBA"
 
   West Ham United:
     fdco: "West Ham"
     api_football: "West Ham"
+    understat: "West Ham"
     short_code: "WHU"
 
   Wolverhampton Wanderers:
     fdco: "Wolves"
     api_football: "Wolves"
+    understat: "Wolverhampton Wanderers"
     short_code: "WOL"

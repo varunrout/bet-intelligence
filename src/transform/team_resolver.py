@@ -58,7 +58,7 @@ class TeamResolver:
         for canonical, info in teams.items():
             self._canonical_info[canonical] = info
 
-            for source_key in ("fdco", "api_football"):
+            for source_key in ("fdco", "api_football", "understat"):
                 raw_name = info.get(source_key)
                 if raw_name:
                     self._lookup[(source_key, raw_name.strip())] = canonical

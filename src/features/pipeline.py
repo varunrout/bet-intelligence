@@ -70,7 +70,8 @@ def _load_stats(competition_key: str, db_path: Path) -> pd.DataFrame:
     sql = """
         SELECT s.match_id, s.team_id, s.is_home,
                s.shots, s.shots_on_target,
-               s.corners, s.fouls, s.yellow_cards, s.red_cards
+               s.corners, s.fouls, s.yellow_cards, s.red_cards,
+               s.xg_for, s.xg_against
         FROM team_match_stats s
         JOIN matches m ON s.match_id = m.match_id
         JOIN competitions c ON m.competition_id = c.competition_id
@@ -225,6 +226,7 @@ def build_features(
 def save_features(
     features_df: pd.DataFrame,
     db_path: Path = DB_PATH,
+    force: bool = False,
 ) -> int:
     """
     Write the feature DataFrame to the engineered_features table.
@@ -232,11 +234,35 @@ def save_features(
     Uses INSERT OR IGNORE based on UNIQUE (match_id, feature_version)
     so the operation is idempotent — safe to run multiple times.
 
+    Parameters
+    ----------
+    features_df : DataFrame returned by build_features()
+    db_path     : path to DuckDB file
+    force       : when True, DELETE existing rows for this feature_version
+                  before inserting.  Use after adding new data sources
+                  (e.g. Understat xG) so existing rows are fully refreshed.
+
     Returns
     -------
     int : number of new rows inserted
     """
     df = features_df.reset_index()  # match_id back as column
+
+    # ── Force rebuild: clear existing rows before re-inserting ────────────
+    if force:
+        with get_connection(db_path) as con:
+            n_del = con.execute(
+                "SELECT COUNT(*) FROM engineered_features WHERE feature_version = ?",
+                [FEATURE_VERSION],
+            ).fetchone()[0]
+            con.execute(
+                "DELETE FROM engineered_features WHERE feature_version = ?",
+                [FEATURE_VERSION],
+            )
+        log.info(
+            "Force rebuild: deleted %d existing feature rows (version='%s').",
+            n_del, FEATURE_VERSION,
+        )
 
     # Schema column ordering — only keep columns that exist in both the
     # DataFrame and the DB schema. Extra columns are silently dropped.

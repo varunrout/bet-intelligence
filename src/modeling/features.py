@@ -3,7 +3,7 @@ Feature preparation utilities for Football Market Intelligence System — Phase 
 
 Defines three feature set groupings keyed by modelling purpose:
   market_only  — Pinnacle closing implied probability only (logistic baseline).
-  form_only    — rolling form + context + Elo, no market signal.
+  form_only    — rolling form + xG + context + Elo, no market signal.
   all          — full feature set (market + form), intended for tree models.
 
 The prepare() function selects, validates, and optionally cleans a feature
@@ -11,8 +11,9 @@ matrix from the master DataFrame loaded from the engineered_features table.
 
 Design rules
 ------------
-- Column lists reference only features with realistic DB coverage (xG and
-  absences columns are excluded — they are structurally null in v1 data).
+- Column lists reference features with ≥ 99% DB coverage.
+- xG rolling features (home/away_xg_for/against_avg5) are included since
+  Understat data was ingested in Phase 4b — ~99.3% coverage.
 - prepare() never modifies the input df; it always returns a copy.
 - When drop_nan_rows=True the returned index is a strict subset of df.index,
   making it safe to recover the target via df.loc[X.index, "over_25"].
@@ -37,6 +38,11 @@ ROLLING_FEATURES: list[str] = [
     "home_over25_last5",
     "home_goals_scored_avg3",
     "home_goals_conceded_avg3",
+    # xG rolling averages (populated via Understat Phase 4b ingestion — ~99.3% coverage)
+    "home_xg_for_avg5",
+    "home_xg_against_avg5",
+    "away_xg_for_avg5",
+    "away_xg_against_avg5",
     "away_goals_scored_avg5",
     "away_goals_conceded_avg5",
     "away_shots_avg5",
