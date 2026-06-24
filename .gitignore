@@ -1,3 +1,35 @@
-/.env.example
-/.pytest_cache
-/.venv
+# Environment
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local data and generated artifacts
+data/raw/
+data/interim/
+data/processed/
+*.duckdb
+*.db
+*.sqlite
+*.sqlite3
+
+# Model and report outputs
+outputs/
+models/
+reports/generated/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
