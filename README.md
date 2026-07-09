@@ -58,6 +58,7 @@ pytest                           # run the test suite
 | `test_odds_transformer.py` | Margin-removal and implied-probability correctness |
 | `test_rolling_form.py` | Rolling windows peeking at the current match |
 | `test_team_resolver.py` | Team-name mismatches across data sources |
+| `test_backtest.py` | Backtest accounting: exact PnL, bankroll conservation, drawdown, Kelly cap, CLV |
 
 ## Data
 
@@ -65,10 +66,30 @@ pytest                           # run the test suite
 - Expected goals: [Understat](https://understat.com/)
 - Storage: DuckDB (`data/db/bet_intelligence.duckdb`), rebuilt locally via `scripts/init_db.py`
 
+## Backtesting engine (decision layer)
+
+`src/evaluation/backtest.py` and `src/prescriptive/staking.py` turn out-of-fold
+predictions into betting decisions and honest accounting, framed as
+uncertainty-aware decision support rather than a promise of guaranteed edge:
+
+- **Selection rules** — bet only when the model's fair price beats the market
+  by a minimum edge (`edge = p × odds − 1`), inside sane odds bands.
+- **Stake sizing** — flat (fixed fraction of current bankroll) or fractional
+  Kelly with a hard cap; negative-edge bets are declined, never shorted.
+- **Accounting** — per-bet PnL ledger, bankroll trajectory, realised return on
+  turnover, and maximum drawdown from a running peak.
+- **Closing-line value** — when closing odds are supplied, every bet is scored
+  against the market's final price, the strongest known indicator of skill.
+
+Bets are processed strictly chronologically: the bankroll at bet *i* depends
+only on bets before it. Covered by hand-computable tests in
+`tests/test_backtest.py` (exact PnL arithmetic, bankroll conservation,
+drawdown-from-peak, Kelly cap binding, CLV maths, and a sequentiality test
+proving no information travels backwards).
+
 ## In development
 
-- `src/evaluation` and `src/prescriptive` — the decision layer: position selection rules, stake sizing, realised return, drawdown and bankroll exposure, framed as uncertainty-aware decision support rather than a promise of guaranteed edge.
-- Closing-line-value analysis against model probabilities.
+- Season-level equity curves and CLV reporting in the dashboard notebooks.
 
 ## Honest limitations
 
